@@ -62,4 +62,9 @@ The `data` folder contains a sample of input and output data.
 
 ## Evaluation
 
-The focus of the evaluation will be clean, readable and tested code which follows best practices.
+What we are looking for:
+- Your code should have meaningful tests. We don’t expect 100% coverage.
+- Communication is crucial to us, and this reflects both in documentation and code (is your code easy to read and understand?). You can also let us know what improvements could be made in the future and where you had to cut corners due to time constraints.
+- You can use whatever library you think makes sense.
+- Be mindful of edge cases and error handling.
+- Read the rules carefully. If you don’t understand something feels free to ask us.
