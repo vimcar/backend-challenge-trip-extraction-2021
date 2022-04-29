@@ -6,11 +6,11 @@ There are many different use-cases for this, one of them is taxation. Our custom
 
 ## The trip extraction
 
-The central piece of the logbook is the trip extraction. Trip extraction is the process of determining when a vehicle starts and stops moving based on data collected by gps trackers (Waypoints).
+The central piece of the logbook is trip extraction. Trip extraction is the process of determining when a vehicle starts and stops moving based on data collected by GPS trackers. The data from the GPS is a list of waypoints collected at semi-regular intervals.
 
-When driving from A to B, a user will probably have interruptions like stopping at red lights, traffic jams, tunnels. The expected behavior is to have one trip accounting for the whole journey, and not broken trips like from A to first red light etc.
+When driving from A to B, a user will probably have interruptions to their movement like stopping at red lights and traffic jams. The expected behavior is to have one trip accounting for the whole journey, and not broken trips like from A to first red light etc.
 
-GPS technology has some limitations which the trip extraction should account for. Within cities the GPS precision may be poorer than 15 meters and the GPS position might even "jump", due to bad reception caused by reflections on building. There are places without gps signal like tunnels and underground parking lots.
+GPS technology has some limitations which the trip extraction should account for. Within cities the GPS precision may be poorer than 15 meters and the GPS position might even "jump", due to bad reception caused by reflections on building. There are places without GPS signal like tunnels and underground parking lots.
 
 ## The task
 
@@ -28,25 +28,16 @@ And a Trip must have this information:
 - `end` – Waypoint, the end of the trip
 - `distance` – int, the sum of distances between the trip's Waypoints in meters
 
-You are free to determine how to store Waypoints (JSON, CSV, a database, etc) and how the resulting Trips should be delivered (again as JSON, CSV, logged to standard output, saved to a file, etc).
-
-Please provide along with your code an example list of Waypoints and the corresponding expected Trips.
-
 To identify the Trips you need to observe the following rules:
 
 - A Trip starts when the distance between two Waypoints is greater than 20 meters
-- A Trip ends when the vehicle remains within a 20 meters radius for 5 minutes
-- If the speed from one Waypoint to the previous is greater than 300 km/h, this is considered a GPS "jump" and the Waypoint should be discarded
+- A Trip ends when the vehicle remains within a 50 meters radius for 3 or more minutes
 
-So, as a contrived example, the smallest possible Trip has 3 Waypoints.
+### The sample file
 
-```mermaid
-flowchart LR
-   A[First waypoint]-. +25 meters\n+10 seconds .-> B[Second waypoint\nTRIP START]
-   B-. +15 meters\n+300 seconds .-> C[Third waypoint\nTRIP END]
-```
+In this repository you will find a [sample](sample.json) file containing a list of Waypoints that you can use. Those Waypoints describe a vehicle driving through the neighborhood around the Vimcar office in Berlin.
 
-This represents a Trip with total distance of 15 meters (and no "jump" Waypoints).
+![sample.png](sample.png)
 
 ## Evaluation
 
